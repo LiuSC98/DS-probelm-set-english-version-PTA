@@ -274,3 +274,63 @@ int main()
 ***Sample Output:***
 
     5 20 -4 4 -5 2 9 1 -2 0
+
+## 6-4 Reverse Linked List (20 points)
+Write a nonrecursive procedure to reverse a singly linked list in O(N) time using constant extra space.
+
+***Format of functions:***
+``` C
+List Reverse( List L );
+```
+where `List` is defined as the following:
+```C
+typedef struct Node *PtrToNode;
+typedef PtrToNode List;
+typedef PtrToNode Position;
+struct Node {
+    ElementType Element;
+    Position Next;
+};
+```
+The function `Reverse` is supposed to return the reverse linked list of `L`, with a dummy header.
+
+***Sample program of judge:***
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int ElementType;
+typedef struct Node *PtrToNode;
+typedef PtrToNode List;
+typedef PtrToNode Position;
+struct Node {
+    ElementType Element;
+    Position Next;
+};
+
+List Read(); /* details omitted */
+void Print( List L ); /* details omitted */
+List Reverse( List L );
+
+int main()
+{
+    List L1, L2;
+    L1 = Read();
+    L2 = Reverse(L1);
+    Print(L1);
+    Print(L2);
+    return 0;
+}
+
+/* Your function will be put here */
+```
+
+***Sample Input:***
+
+    5
+    1 3 4 5 2
+
+***Sample Output:***
+
+    2 5 4 3 1
+    2 5 4 3 1
