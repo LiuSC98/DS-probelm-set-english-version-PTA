@@ -393,3 +393,60 @@ int main()
 ***Sample Output 3:***
 
     ERROR
+
+## 6-6 Level-order Traversal (25 points)
+Write a routine to list out the nodes of a binary tree in "level-order". List the root, then nodes at depth 1, followed by nodes at depth 2, and so on. You must do this in linear time.
+
+***Format of functions:***
+```C
+void Level_order ( Tree T, void (*visit)(Tree ThisNode) );
+```
+
+where `void (*visit)(Tree ThisNode)` is a function that handles `ThisNode` being visited by `Level_order`, and `Tree` is defined as the following:
+```C
+typedef struct TreeNode *Tree;
+struct TreeNode {
+    ElementType Element;
+    Tree  Left;
+    Tree  Right;
+};
+```
+
+***Sample program of judge:***
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MaxTree 10 /* maximum number of nodes in a tree */
+typedef int ElementType;
+
+typedef struct TreeNode *Tree;
+struct TreeNode {
+    ElementType Element;
+    Tree  Left;
+    Tree  Right;
+};
+
+Tree BuildTree(); /* details omitted */
+void PrintNode( Tree NodePtr )
+{
+   printf(" %d", NodePtr->Element);
+}
+
+void Level_order ( Tree T, void (*visit)(Tree ThisNode) );
+
+int main()
+{
+    Tree T = BuildTree();
+    printf("Level-order:");
+    Level_order(T, PrintNode);
+    return 0;
+}
+
+/* Your function will be put here */
+```
+***Sample Output (for the tree shown in the figure):***
+
+![6-6 Figure 1](/img/6-6-fig-1.jpg "6-6 Figure 1")  
+
+    Level-order: 3 5 6 1 8 10 9
