@@ -451,7 +451,7 @@ int main()
 
     Level-order: 3 5 6 1 8 10 9
 
-## 6-7 Isomorphic (20 分)
+## 6-7 Isomorphic (20 points)
 Two trees, `T1` and `T2`, are **isomorphic** if `T1` can be transformed into `T2` by swapping left and right children of (some of the) nodes in `T1`. For instance, the two trees in Figure 1 are isomorphic because they are the same if the children of A, B, and G, but not the other nodes, are swapped. Give a polynomial time algorithm to decide if two trees are isomorphic.
 
 <div align='center'>
@@ -861,4 +861,82 @@ int main()
 
     -1 1 0 3 2 2 1 
 
-## 
+## 6-12 Shortest Path [2] (25 points)
+Write a program to find the weighted shortest distances from any vertex to a given source vertex in a digraph. It is guaranteed that all the weights are positive.
+
+***Format of functions:***
+```C
+void ShortestDist( MGraph Graph, int dist[], Vertex S );
+```
+where `MGraph` is defined as the following:
+```C
+typedef struct GNode *PtrToGNode;
+struct GNode{
+    int Nv;
+    int Ne;
+    WeightType G[MaxVertexNum][MaxVertexNum];
+};
+typedef PtrToGNode MGraph;
+```
+The shortest distance from `V` to the source `S` is supposed to be stored in `dist[V]`. If `V` cannot be reached from `S`, store -1 instead.
+
+***Sample program of judge:***
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef enum {false, true} bool;
+#define INFINITY 1000000
+#define MaxVertexNum 10  /* maximum number of vertices */
+typedef int Vertex;      /* vertices are numbered from 0 to MaxVertexNum-1 */
+typedef int WeightType;
+
+typedef struct GNode *PtrToGNode;
+struct GNode{
+    int Nv;
+    int Ne;
+    WeightType G[MaxVertexNum][MaxVertexNum];
+};
+typedef PtrToGNode MGraph;
+
+MGraph ReadG(); /* details omitted */
+
+void ShortestDist( MGraph Graph, int dist[], Vertex S );
+
+int main()
+{
+    int dist[MaxVertexNum];
+    Vertex S, V;
+    MGraph G = ReadG();
+
+    scanf("%d", &S);
+    ShortestDist( G, dist, S );
+
+    for ( V=0; V<G->Nv; V++ )
+        printf("%d ", dist[V]);
+
+    return 0;
+}
+
+/* Your function will be put here */
+```
+***Sample Input (for the graph shown in the figure):***
+
+![6-12 Figure 1](/img/6-12-fig-1.jpg "6-12 Figure 1")
+
+    7 9
+    0 1 1
+    0 5 1
+    0 6 1
+    5 3 1
+    2 1 2
+    2 6 3
+    6 4 4
+    4 5 5
+    6 5 12
+    2
+***Sample Output:***
+    
+    -1 2 0 13 7 12 3 
+
+##
