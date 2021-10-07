@@ -498,7 +498,7 @@ int main()
     Tree T1, T2;
     T1 = BuildTree();
     T2 = BuildTree();
-    printf(“%d\n”, Isomorphic(T1, T2));
+    printf("%d\n", Isomorphic(T1, T2));
     return 0;
 }
 
