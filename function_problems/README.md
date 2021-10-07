@@ -747,6 +747,8 @@ int main()
 ```
 ***Sample Input (for the graph shown in the figure):***
 
+![6-10 Figure 1](/img/6-10-fig-1.jpg "6-10 Figure 1")
+
     4 5
     0 1
     1 2
@@ -762,5 +764,101 @@ Note: The output order does not matter. That is, a solution like
     0 1 2 
     3 
 is also considered correct.
+
+## 6-11 Shortest Path [1] (25 points)
+Write a program to find the unweighted shortest distances from any vertex to a given source vertex in a digraph.
+
+***Format of functions:***
+```C
+void ShortestDist( LGraph Graph, int dist[], Vertex S );
+```
+where `LGraph` is defined as the following:
+```C
+typedef struct AdjVNode *PtrToAdjVNode; 
+struct AdjVNode{
+    Vertex AdjV;
+    PtrToAdjVNode Next;
+};
+
+typedef struct Vnode{
+    PtrToAdjVNode FirstEdge;
+} AdjList[MaxVertexNum];
+
+typedef struct GNode *PtrToGNode;
+struct GNode{  
+    int Nv;
+    int Ne;
+    AdjList G;
+};
+typedef PtrToGNode LGraph;
+```
+The shortest distance from V to the source S is supposed to be stored in dist[V]. If V cannot be reached from S, store -1 instead.
+
+***Sample program of judge:***
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef enum {false, true} bool;
+#define MaxVertexNum 10  /* maximum number of vertices */
+typedef int Vertex;      /* vertices are numbered from 0 to MaxVertexNum-1 */
+
+typedef struct AdjVNode *PtrToAdjVNode; 
+struct AdjVNode{
+    Vertex AdjV;
+    PtrToAdjVNode Next;
+};
+
+typedef struct Vnode{
+    PtrToAdjVNode FirstEdge;
+} AdjList[MaxVertexNum];
+
+typedef struct GNode *PtrToGNode;
+struct GNode{  
+    int Nv;
+    int Ne;
+    AdjList G;
+};
+typedef PtrToGNode LGraph;
+
+LGraph ReadG(); /* details omitted */
+
+void ShortestDist( LGraph Graph, int dist[], Vertex S );
+
+int main()
+{
+    int dist[MaxVertexNum];
+    Vertex S, V;
+    LGraph G = ReadG();
+
+    scanf("%d", &S);
+    ShortestDist( G, dist, S );
+
+    for ( V=0; V<G->Nv; V++ )
+        printf("%d ", dist[V]);
+
+    return 0;
+}
+
+/* Your function will be put here */
+```
+***Sample Input (for the graph shown in the figure):***
+
+![6-11 Figure 1](/img/6-11-fig-1.jpg "6-11 Figure 1")
+
+    7 9
+    0 1
+    0 5
+    0 6
+    5 3
+    2 1
+    2 6
+    6 4
+    4 5
+    6 5
+    2
+***Sample Output:***
+
+    -1 1 0 3 2 2 1 
 
 ## 
